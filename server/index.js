@@ -21,6 +21,7 @@ massive(process.env.CONNECTION_STRING)
 app.get('/api/test', controller.test);
 
 app.get('/api/inventory', controller.getInventory);
+app.post('/api/inventory', controller.addProduct);
 
 // sets up local server on port 3001
 const port = process.env.PORT || 3001;

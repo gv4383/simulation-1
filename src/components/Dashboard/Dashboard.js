@@ -15,7 +15,7 @@ class Dashboard extends Component {
           productKey={ i }
           productName={ item.name }
           productPrice={ item.price }
-          productImage={ item.image } />
+          productImage={ item.image_url } />
       );
     });
 

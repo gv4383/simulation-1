@@ -3,10 +3,24 @@ module.exports = {
     res.status(200).send("Working!!!");
   },
 
+  // displays entire inventory table
   getInventory: (req, res, next) => {
-    let db = req.app.get('db');
-    db.get_inventory().then(inventory => {
+    let dbInstance = req.app.get('db');
+    dbInstance.get_inventory().then(inventory => {
       return res.status(200).send(inventory);
+    });
+  },
+
+  // adds a new product to inventory table
+  addProduct: (req, res, next) => {
+    const { name, price, image_url } = req.body;
+
+    let dbInstance = req.app.get('db');
+    dbInstance.create_product([name, price, image_url])
+      .then(() => res.sendStatus(200))
+      .catch(err => {
+        res.status(500).send({ errorMessage: "Oops! Something went wrong..."});
+        console.log(err);
     });
   }
 }

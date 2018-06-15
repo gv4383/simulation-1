@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import axios from 'axios';
 
 import Dashboard from './components/Dashboard/Dashboard'
 import './App.css';
@@ -9,27 +10,37 @@ class App extends Component {
     super();
 
     this.state = {
-      inventoryList: [
-        {
-          name: 'left shoe',
-          price: 1.298,
-          image: 'leftshoe.url',
-        },
-        {
-          name: 'squirrel',
-          price: 19.69,
-          image: 'squirrel.url',
-        },
-        {
-          name: 'rice',
-          price: 4.00,
-          image: 'rice.url',
-        },
-      ],
+      // inventoryList: [
+      //   {
+      //     name: 'left shoe',
+      //     price: 1.298,
+      //     image: 'leftshoe.url',
+      //   },
+      //   {
+      //     name: 'squirrel',
+      //     price: 19.69,
+      //     image: 'squirrel.url',
+      //   },
+      //   {
+      //     name: 'rice',
+      //     price: 4.00,
+      //     image: 'rice.url',
+      //   },
+      // ],
+      inventoryList: [],
       userInput1: '',
       userInput2: '',
       userInput3: ''
     };
+  }
+
+  componentDidMount = () => {
+    axios.get('/api/inventory').then(response => {
+      console.log(`response.data: ${ response.data }`);
+      this.setState({
+        inventoryList: response.data
+      });
+    });
   }
 
   onChangeHandler1 = (event) => {
