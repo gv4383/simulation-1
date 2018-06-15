@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+
+import Dashboard from './components/Dashboard/Dashboard'
 import './App.css';
 
 class App extends Component {
@@ -7,7 +9,23 @@ class App extends Component {
     super();
 
     this.state = {
-      inventoryList: [],
+      inventoryList: [
+        {
+          name: 'left shoe',
+          price: 1.298,
+          image: 'leftshoe.url',
+        },
+        {
+          name: 'squirrel',
+          price: 19.69,
+          image: 'squirrel.url',
+        },
+        {
+          name: 'rice',
+          price: 4.00,
+          image: 'rice.url',
+        },
+      ],
       userInput1: '',
       userInput2: '',
       userInput3: ''
@@ -49,7 +67,7 @@ class App extends Component {
   
   render() {
     const { onChangeHandler1, onChangeHandler2, onChangeHandler3, testClick, cancelHandler } = this;
-    const { userInput1, userInput2, userInput3 } = this.state;
+    const { inventoryList, userInput1, userInput2, userInput3 } = this.state;
 
     return (
       <div className="App">
@@ -67,6 +85,7 @@ class App extends Component {
           onChange={ onChangeHandler3 } />
         <button onClick={ testClick }>Add</button>
         <button onClick={ cancelHandler }>Cancel</button>
+        <Dashboard list={ inventoryList } />
       </div>
     );
   }
