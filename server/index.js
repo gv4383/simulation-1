@@ -7,6 +7,7 @@ const massive = require('massive');
 
 // sets app as local server
 const app = express();
+app.use(json());
 
 // connects local server to database
 massive(process.env.CONNECTION_STRING)
@@ -14,5 +15,6 @@ massive(process.env.CONNECTION_STRING)
     app.set("db", dbInstance);
 }).catch(err => console.log(err));
 
+// sets up local server on port 3001
 const port = process.env.PORT || 3001;
 app.listen(port, () => console.log(`Listening @ port: ${ port }`));
