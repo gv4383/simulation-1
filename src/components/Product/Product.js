@@ -3,6 +3,7 @@ import React from 'react';
 const Product = (props) => {
   const { productKey, productName, productPrice, productImage } = props;
 
+  // template for each product being displayed
   return (
     <div key={ productKey }>
       <h3>{ productName }</h3>

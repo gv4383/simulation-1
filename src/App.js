@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import axios from 'axios';
 
-import Dashboard from './components/Dashboard/Dashboard'
+import Dashboard from './components/Dashboard/Dashboard';
+import Form from './components/Form/Form';
 import './App.css';
 
 class App extends Component {
@@ -10,33 +11,16 @@ class App extends Component {
     super();
 
     this.state = {
-      // inventoryList: [
-      //   {
-      //     name: 'left shoe',
-      //     price: 1.298,
-      //     image: 'leftshoe.url',
-      //   },
-      //   {
-      //     name: 'squirrel',
-      //     price: 19.69,
-      //     image: 'squirrel.url',
-      //   },
-      //   {
-      //     name: 'rice',
-      //     price: 4.00,
-      //     image: 'rice.url',
-      //   },
-      // ],
       inventoryList: [],
-      userInput1: '',
-      userInput2: '',
-      userInput3: ''
+      productName: '',
+      productPrice: '',
+      productImageUrl: ''
     };
   }
 
   componentDidMount = () => {
     axios.get('/api/inventory').then(response => {
-      console.log(`response.data: ${ response.data }`);
+      // console.log(`response.data: ${ response.data }`);
       this.setState({
         inventoryList: response.data
       });
@@ -46,21 +30,21 @@ class App extends Component {
   onChangeHandler1 = (event) => {
     // console.log(event.target.value);
     this.setState({
-      userInput1: event.target.value
+      productName: event.target.value
     });
   }
 
   onChangeHandler2 = (event) => {
     // console.log(event.target.value);
     this.setState({
-      userInput2: event.target.value
+      productPrice: event.target.value
     });
   }
 
   onChangeHandler3 = (event) => {
     // console.log(event.target.value);
     this.setState({
-      userInput3: event.target.value
+      productImageUrl: event.target.value
     });
   }
   
@@ -69,33 +53,42 @@ class App extends Component {
   }
 
   cancelHandler = () => {
+    // clears the input fields
     this.setState({
-      userInput1: '',
-      userInput2: '',
-      userInput3: ''
+      productName: '',
+      productPrice: '',
+      productImageUrl: ''
     });
   }
   
   render() {
-    const { onChangeHandler1, onChangeHandler2, onChangeHandler3, testClick, cancelHandler } = this;
-    const { inventoryList, userInput1, userInput2, userInput3 } = this.state;
+    const { onChangeHandler1, onChangeHandler2, onChangeHandler3, testClick, cancelHandler, componentDidMount } = this;
+    const { inventoryList, productName, productPrice, productImageUrl } = this.state;
 
     return (
       <div className="App">
         <input
-          placeholder="Input 1"
-          value={ userInput1 }
+          placeholder="Product Name"
+          value={ productName }
           onChange={ onChangeHandler1 } />
         <input
-          placeholder="Input 2"
-          value={ userInput2 }
+          placeholder="Product Price"
+          value={ productPrice }
           onChange={ onChangeHandler2 } />
         <input
-          placeholder="Input 3"
-          value={ userInput3 }
+          placeholder="Product URL"
+          value={ productImageUrl }
           onChange={ onChangeHandler3 } />
-        <button onClick={ testClick }>Add</button>
+
+          {/* Form component acts as an 'add' button */}
+          <Form 
+            getInventory={ componentDidMount }
+            name={ productName }
+            price={ productPrice }
+            url={ productImageUrl }>Add</Form>
         <button onClick={ cancelHandler }>Cancel</button>
+
+        {/* displays all products */}
         <Dashboard list={ inventoryList } />
       </div>
     );

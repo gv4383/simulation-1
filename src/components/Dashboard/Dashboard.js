@@ -9,6 +9,8 @@ class Dashboard extends Component {
 
   render() {
     const { list } = this.props;
+    
+    // mapps over inventory list and displays however many products are in the list
     let displayItems = list.map((item, i) => {
       return (
         <Product
@@ -19,6 +21,7 @@ class Dashboard extends Component {
       );
     });
 
+    // displays the total amount of products
     return (
       <div>
         { displayItems }
