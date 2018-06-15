@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Product from './../Product/Product';
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -9,11 +11,11 @@ class Dashboard extends Component {
     const { list } = this.props;
     let displayItems = list.map((item, i) => {
       return (
-        <div key={ i }>
-          <h3>{ item.name }</h3>
-          <p>{ item.price }</p>
-          <p>{ item.image }</p>
-        </div>
+        <Product
+          productKey={ i }
+          productName={ item.name }
+          productPrice={ item.price }
+          productImage={ item.image } />
       );
     });
 
