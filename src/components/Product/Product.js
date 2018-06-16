@@ -9,6 +9,10 @@ const Product = (props) => {
       <h3>{ productName }</h3>
       <p>{ productPrice }</p>
       <p>{ productImage }</p>
+      <button>Edit</button>
+      <button>Delete</button>
+      <br />
+      <br />
     </div>
   );
 }

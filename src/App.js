@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import axios from 'axios';
 
 import Dashboard from './components/Dashboard/Dashboard';
@@ -22,7 +21,10 @@ class App extends Component {
     axios.get('/api/inventory').then(response => {
       // console.log(`response.data: ${ response.data }`);
       this.setState({
-        inventoryList: response.data
+        inventoryList: response.data,
+        productName: '',
+        productPrice: '',
+        productImageUrl: ''
       });
     });
   }

@@ -20,7 +20,20 @@ module.exports = {
       .then(() => res.sendStatus(200))
       .catch(err => {
         res.status(500).send({ errorMessage: "Oops! Something went wrong..."});
-        console.log(err);
+      console.log(err);
+    });
+  },
+
+  // deletes a product entry within the inventory table
+  deleteProduct: (req, res, next) => {
+    const { id } = req.params
+
+    let dbInstance = req.app.get('db');
+    dbInstance.delete_product(id)
+      .then(() => res.sendStatus(200))
+      .catch(err => {
+        res.status(500).send({ errorMessage: 'Oops! Something went wrong...'});
+      console.log(err);
     });
   }
 }

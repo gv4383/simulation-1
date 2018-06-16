@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import App from './../../App';
-
 class Form extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      editing: false
+    };
   }
 
   addProduct = (event) => {
