@@ -62,10 +62,30 @@ class App extends Component {
       productImageUrl: ''
     });
   }
+
+  deleteHandler = (id) => {
+    axios.delete(`/api/inventory/${ id }`).then(response => {
+      this.componentDidMount();
+    });
+  }
   
   render() {
-    const { onChangeHandler1, onChangeHandler2, onChangeHandler3, testClick, cancelHandler, componentDidMount } = this;
-    const { inventoryList, productName, productPrice, productImageUrl } = this.state;
+    const {
+      onChangeHandler1,
+      onChangeHandler2,
+      onChangeHandler3,
+      testClick,
+      cancelHandler,
+      componentDidMount,
+      deleteHandler
+    } = this;
+
+    const {
+      inventoryList,
+      productName,
+      productPrice,
+      productImageUrl
+    } = this.state;
 
     return (
       <div className="App">
@@ -91,7 +111,9 @@ class App extends Component {
         <button onClick={ cancelHandler }>Cancel</button>
 
         {/* displays all products */}
-        <Dashboard list={ inventoryList } />
+        <Dashboard
+          list={ inventoryList }
+          deleteProducts={ deleteHandler } />
       </div>
     );
   }

@@ -1,7 +1,14 @@
 import React from 'react';
 
 const Product = (props) => {
-  const { productKey, productName, productPrice, productImage } = props;
+  const {
+    productKey,
+    productId,
+    productName,
+    productPrice,
+    productImage,
+    deleteProduct
+  } = props;
 
   // template for each product being displayed
   return (
@@ -10,7 +17,7 @@ const Product = (props) => {
       <p>{ productPrice }</p>
       <p>{ productImage }</p>
       <button>Edit</button>
-      <button>Delete</button>
+      <button onClick={ () => deleteProduct(productId) }>Delete</button>
       <br />
       <br />
     </div>

@@ -8,16 +8,21 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { list } = this.props;
+    const {
+      list,
+      deleteProducts
+    } = this.props;
     
     // mapps over inventory list and displays however many products are in the list
     let displayItems = list.map((item, i) => {
       return (
         <Product
           productKey={ i }
+          productId={ item.id }
           productName={ item.name }
           productPrice={ item.price }
-          productImage={ item.image_url } />
+          productImage={ item.image_url }
+          deleteProduct={ deleteProducts } />
       );
     });
 
